@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Ипотечный калькулятор</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <h1>Рассчитайте ипотеку</h1>
+        <section>
+            <article class="calculator">
+                <select class="programm">
+                    <option value="all">Все программы</option>
+                    <option value="standart">Стандартная</option>
+                    <option value="family">Семейная</option>
+                    <option value="IT">IT-ипотека</option>
+                </select>
+                <select class="banks">
+                    <option value="all-banks">Все банки</option>
+                    <option value="vtb">ВТБ</option>
+                    <option value="sber">Сбер</option>
+                    <option value="alfa">Альфа-банк</option>
+                </select>
+                <form class="cost-form">
+                    <input type="number" id="number" value="5000000" class="cost-output">
+                    <input type="range" class="cost" id="cost" name="cost" min="5000000" max="80000000" step="1" value="5000000">
+                    <label for="cost">Стоимость недвижимости, ₽</label> 
+                </form>
+                <form class="percent-form">
+                    <input type="number" class="percent-cost" name="percent-cost" id="percent-cost" value="500000">
+                    /<input type="number" class="percent-output" name="percent-output" id="percent-output" value="10">%
+                    <input type="range" class="percent" id="percent" name="percent" min="10" max="99" step="1" value="10">
+                    <label for="percent">Первоначальный взнос, ₽</label>
+                </form>
+                <form class="sum-form">
+                    <p>Сумма кредита:</p>
+                    <output class="sum">4500000</output>
+                </form>
+                <form class="period-form">
+                    <input type="number" class="period-output" name="period-output" value="20">
+                    <input type="range" class="period" name="period" min="1" max="35" step="1" value="20">
+                    <label for="period">Срок кредита, лет</label>
+                </form>
+            </article>
+            <article class="banks">
+                <div class="bank-offer vtb hidden">
+                    <img src="css/img/vtb.svg">
+                    <div class="info">
+                        от <output class="payment">49548</output>
+                    </div>
+                    <div>
+                        от <output class="percent-rate">12</output>%
+                    </div>
+                    <p>1-30 лет</p>
+                    <button type="button" class="request">Оставить заявку</button>
+                </div>
+                <div class="bank-offer alfa hidden">
+                    <img src="css/img/alfa.svg">
+                    <div class="info">
+                        от <output class="payment">52720</output>
+                    </div>
+                   <div>
+                     от <output class="percent-rate">13</output>%
+                   </div>
+                    <p>1-30 лет</p>
+                    <button type="button" class="request">Оставить заявку</button>
+                </div>
+                <div class="bank-offer sber hidden">
+                    <img src="css/img/sber.svg">
+                    <div class="info">
+                        от <output class="payment">55958</output>
+                    </div>
+                    <div>
+                        от <output class="percent-rate">14</output>%
+                    </div>
+                    <p>1-30 лет</p>
+                    <button type="button" class="request">Оставить заявку</button>
+                </div>
+            </article>
+        </section>
+
+        <script src="js/main.js" async defer></script>
+    </body>
+</html>
