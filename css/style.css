@@ -1,0 +1,101 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'CenturyGothic';
+}
+
+@font-face {
+    font-family: 'CenturyGothic';
+    src: local(CenturyGothic),
+         url(fonts/CenturyGothic.woff) format(woff),
+         url(fonts/CenturyGothic-Bold.woff) format(woff);
+}
+
+/*Калькулятор*/
+
+section {
+    display: flex;
+    gap: 80px;
+    justify-content: center;
+}
+
+h1 {
+    margin: 40px 0;
+    text-align: center;
+}
+
+.calculator {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+select, form {
+    padding: 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 15px;
+    background-color: #f4f6fb;
+    display: flex;
+    justify-content: space-between;
+}
+
+input[type='number'] {
+    border: none;
+    background-color: #f4f6fb;
+    font-size: 16px;
+}
+
+.percent-output {
+    width: 40px;
+}
+
+/*Предложения*/
+
+img {
+    width: 60px;
+}
+
+.banks {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.bank-offer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border: 2px solid #007bfb;
+    border-radius: 15px;
+    width: 800px;
+    font-size: 16px;
+}
+
+.payment {
+    color: #007bfb;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.hidden {
+    display: none;
+}
+
+button {
+    background-color: #f4f6fb;
+    border: none;
+    border-radius: 15px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #d3d3d4;
+    transition: 0.3s;
+}
+
+button:not(:hover) {
+    transition: 0.3s;
+}
