@@ -1,5 +1,3 @@
-//Калькулятор
-
 let costOutput = document.querySelector('.cost-output');
 let cost = document.querySelector('.cost');
 let percent = document.querySelector('.percent');
@@ -37,18 +35,20 @@ periodOutput.addEventListener('input', function (periodOutput) {
     period.value = periodOutput.target.value;
 });
 
+function ifCost(output, numLess, numMore) {
+    if (output.value < numLess) {
+        output.value = numLess;
+    }
+    if (output.value > numMore) {
+        output.value = numMore;
+    }
+}
+
 costOutput.onchange = function () {
-    if (costOutput.value < 5000000) {
-        costOutput.value = 5000000;
-    }
-    if (costOutput.value > 80000000) {
-        costOutput.value = 80000000;
-    }
+    ifCost(costOutput, 5000000, 80000000);
 
     percentCost.value = Math.floor(costOutput.value * percent.value/100);
     sum.value = costOutput.value - percentCost.value;
-
-    
 };
 
 percentCost.onchange = function () {
@@ -62,252 +62,132 @@ percentCost.onchange = function () {
     percentOutput.value = Math.floor(percentCost.value / cost.value*100);
     percent.value = Math.floor(percentCost.value / cost.value*100);
     sum.value = costOutput.value - percentCost.value;
-
-    
 };
 
 percentOutput.onchange = function () {
-    if (percentOutput.value < 10) {
-        percentOutput.value = 10;
-    }
-    if (percentOutput.value > 99) {
-        percentOutput.value = 99;
-    }
+    ifCost(percentOutput, 10, 99);
 
     percentCost.value = Math.floor(cost.value * percentOutput.value/100);
     sum.value = costOutput.value - percentCost.value;
-
-    
 };
 
 periodOutput.onchange = function () {
-    if (periodOutput.value < 1) {
-        periodOutput.value = 1;
-    }
-    if (periodOutput.value > 35) {
-        periodOutput.value = 35;
-    }
-
-    
+    ifCost(percentOutput, 1, 35);
 };
-
-//Предложения от банков
 
 let payments = document.querySelectorAll('.payment');
 let percentRates = document.querySelectorAll('.percent-rate');
-let i;
-let n;
-let d;
 let bankOffers = document.querySelectorAll('.bank-offer');
 let program = document.querySelector('.program');
 
-for (let percentRate of percentRates) {
-    for (let payment of payments) {
-        function func() {
-            i = percentRate.value / 1200;
-            n = period.value * 12;
-            d = Math.pow(1+i, n);
-            payment.value = Math.floor(sum.value * ((i * d) / (d - 1)));
-        };
-        function events() {
-            period.addEventListener('change', function () {
-                func ();
-            });
-            periodOutput.addEventListener('change', function () {
-                func ();
-            });
-            cost.addEventListener('change', function () {
-                func ();
-            });
-            costOutput.addEventListener('change', function () {
-                func ();
-            });
-            percent.addEventListener('change', function () {
-                func ();
-            });
-            percentOutput.addEventListener('change', function () {
-                func ();
-            });
-            percentCost.addEventListener('change', function () {
-                func ();
-            });
-        };
-        if (payment.closest('.vtb')) {
-            if (percentRate.closest('.vtb')) {
-                percentRate.value = 12;
-                events();
-            };
-        };
-        if (payment.closest('.alfa')) {
-            if (percentRate.closest('.alfa')) {
-                percentRate.value = 13;
-                events();
-            };
-        };
-        if (payment.closest('.sber')) {
-            if (percentRate.closest('.sber')) {
-                percentRate.value = 14;
-                events();
-            };
-        };
-    };
+function calculations(percentRate, period, payment) {
+    let i = percentRate.value / 1200;
+    let n = period.value * 12;
+    let d = Math.pow(1 + i, n);
+    payment.value = Math.floor(sum.value * ((i * d) / (d - 1)));
+}
+
+function events(period, periodOutput, cost, costOutput, percent, percentOutput, percentCost, percentRate, payment) {
+    period.addEventListener('change', function () {
+        calculations (percentRate, period, payment);
+    });
+    periodOutput.addEventListener('change', function () {
+        calculations (percentRate, period, payment);
+    });
+    cost.addEventListener('change', function () {
+        calculations (percentRate, period, payment);
+    });
+    costOutput.addEventListener('change', function () {
+        calculations (percentRate, period, payment);
+    });
+    percent.addEventListener('change', function () {
+        calculations (percentRate, period, payment);
+    });
+    percentOutput.addEventListener('change', function () {
+        calculations (percentRate, period, payment);
+    });
+    percentCost.addEventListener('change', function () {
+        calculations (percentRate, period, payment);
+    });
 };
 
-program.addEventListener('change', function (program) {
-    if (program.target.value === 'standart') {
-        for (let percentRate of percentRates) {
-            for (let payment of payments) {
-                function func() {
-                    i = percentRate.value / 1200;
-                    n = period.value * 12;
-                    d = Math.pow(1+i, n);
-                    payment.value = Math.floor(sum.value * ((i * d) / (d - 1)));
-                };
-                if (payment.closest('.vtb')) {
-                    if (percentRate.closest('.vtb')) {
-                        percentRate.value = 3;
-                        events();
-                        func();
-                    };
-                };
-                if (payment.closest('.alfa')) {
-                    if (percentRate.closest('.alfa')) {
-                        percentRate.value = 4;
-                        events();
-                        func();
-                    };
-                };
-                if (payment.closest('.sber')) {
-                    if (percentRate.closest('.sber')) {
-                        percentRate.value = 5;
-                        events();
-                        func();
-                    };
-                };
-            };
-        };
-    } else if (program.target.value === 'family') {
-        for (let percentRate of percentRates) {
-            for (let payment of payments) {
-                function func() {
-                    i = percentRate.value / 1200;
-                    n = period.value * 12;
-                    d = Math.pow(1+i, n);
-                    payment.value = Math.floor(sum.value * ((i * d) / (d - 1)));
-                };
-                if (payment.closest('.vtb')) {
-                    if (percentRate.closest('.vtb')) {
-                        percentRate.value = 6;
-                        events();
-                        func();
-                    };
-                };
-                if (payment.closest('.alfa')) {
-                    if (percentRate.closest('.alfa')) {
-                        percentRate.value = 7;
-                        events();
-                        func();
-                    };
-                };
-                if (payment.closest('.sber')) {
-                    if (percentRate.closest('.sber')) {
-                        percentRate.value = 8;
-                        events();
-                        func();
-                    };
-                };
-            };
-        };
-    } else if (program.target.value === 'IT') {
-        for (let percentRate of percentRates) {
-            for (let payment of payments) {
-                function func() {
-                    i = percentRate.value / 1200;
-                    n = period.value * 12;
-                    d = Math.pow(1+i, n);
-                    payment.value = Math.floor(sum.value * ((i * d) / (d - 1)));
-                };
-                if (payment.closest('.vtb')) {
-                    if (percentRate.closest('.vtb')) {
-                        percentRate.value = 9;
-                        events();
-                        func();
-                    };
-                };
-                if (payment.closest('.alfa')) {
-                    if (percentRate.closest('.alfa')) {
-                        percentRate.value = 10;
-                        events();
-                        func();
-                    };
-                };
-                if (payment.closest('.sber')) {
-                    if (percentRate.closest('.sber')) {
-                        percentRate.value = 11;
-                        events();
-                        func();
-                    };
-                };
-            };
-        };
-    } else { 
-        for (let percentRate of percentRates) {
-            for (let payment of payments) {
-                function func() {
-                    i = percentRate.value / 1200;
-                    n = period.value * 12;
-                    d = Math.pow(1+i, n);
-                    payment.value = Math.floor(sum.value * ((i * d) / (d - 1)));
-                };
-                if (payment.closest('.vtb')) {
-                    if (percentRate.closest('.vtb')) {
-                        percentRate.value = 12;
-                        events();
-                        func();
-                    };
-                };
-                if (payment.closest('.alfa')) {
-                    if (percentRate.closest('.alfa')) {
-                        percentRate.value = 13;
-                        events();
-                        func();
-                    };
-                };
-                if (payment.closest('.sber')) {
-                    if (percentRate.closest('.sber')) {
-                        percentRate.value = 14;
-                        events();
-                        func();
-                    };
-                };
-            };
+function iffer(bank, period, periodOutput, cost, costOutput, percent, percentOutput, percentCost, percentRate, payment) {
+    if (payment.closest(bank)) {
+        if (percentRate.closest(bank)) {
+            events(period, periodOutput, cost, costOutput, percent, percentOutput, percentCost, percentRate, payment);
         };
     };
+}
+
+function wrapper(period, periodOutput, cost, costOutput, percent, percentOutput, percentCost, percentRate, payment, programStatus) {
+    switch (programStatus) {
+        case 'standart':
+            iffer('.vtb', period, periodOutput, cost, costOutput, percent, percentOutput, percentCost, 3, payment);
+            iffer('.alfa', period, periodOutput, cost, costOutput, percent, percentOutput, percentCost, 4, payment);
+            iffer('.sber', period, periodOutput, cost, costOutput, percent, percentOutput, percentCost, 5, payment);
+            break;
+        case 'all':
+            iffer('.vtb', period, periodOutput, cost, costOutput, percent, percentOutput, percentCost, 12, payment);
+            iffer('.alfa', period, periodOutput, cost, costOutput, percent, percentOutput, percentCost, 13, payment);
+            iffer('.sber', period, periodOutput, cost, costOutput, percent, percentOutput, percentCost, 14, payment);
+            break;
+        case 'family':
+            iffer('.vtb', period, periodOutput, cost, costOutput, percent, percentOutput, percentCost, 6, payment);
+            iffer('.alfa', period, periodOutput, cost, costOutput, percent, percentOutput, percentCost, 7, payment);
+            iffer('.sber', period, periodOutput, cost, costOutput, percent, percentOutput, percentCost, 8, payment);
+            break;
+        case 'IT':
+            iffer('.vtb', period, periodOutput, cost, costOutput, percent, percentOutput, percentCost, 9, payment);
+            iffer('.alfa', period, periodOutput, cost, costOutput, percent, percentOutput, percentCost, 10, payment);
+            iffer('.sber', period, periodOutput, cost, costOutput, percent, percentOutput, percentCost, 11, payment);
+            break;
+        default:
+            break;
+        }   
+    }
+
+function forWrapper(programStatus) {
+    for (let percentRate of percentRates) {
+        for (let payment of payments) {
+            wrapper(period, periodOutput, cost, costOutput, percent, percentOutput, percentCost, percentRate, payment, programStatus);
+        };
+    };
+}
+
+function ifForWrapper(programStatus, program) {
+    if (program.target.value === programStatus) {
+        forWrapper(programStatus);
+    }
+}
+
+forWrapper();
+
+program.addEventListener('change', function (program) {
+    ifForWrapper('all', program);
+    ifForWrapper('standart', program);
+    ifForWrapper('family', program);
+    ifForWrapper('IT', program);
 });
 
 let banks = document.querySelector('.banks');
+
+function ifBank(bankName, bankOffer) {
+    if (bankOffer.matches(bankName)) {
+        bankOffer.classList.remove('hidden');
+    } else {
+        bankOffer.classList.add('hidden');
+    }
+}
 
 for (let bankOffer of bankOffers) {
     bankOffer.classList.remove('hidden');
     banks.addEventListener('change', function (banks) {
         if (banks.target.value === "vtb") {
-            if (bankOffer.matches('.vtb')) {
-                bankOffer.classList.remove('hidden');
-            } else {
-                bankOffer.classList.add('hidden');
-            };
+            ifBank('.vtb');
         } else if (banks.target.value === "sber") {
-            if (bankOffer.matches('.sber')) {
-                bankOffer.classList.remove('hidden');
-            } else {
-                bankOffer.classList.add('hidden');
-            };
+            ifBank('.sber');
         } else if (banks.target.value === "alfa") {
-            if (bankOffer.matches('.alfa')) {
-                bankOffer.classList.remove('hidden');
-            } else {
-                bankOffer.classList.add('hidden');
-            };
+            ifBank('.alfa');
         } else {
             bankOffer.classList.remove('hidden');
         };
